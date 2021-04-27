@@ -63,14 +63,6 @@ def parseString(string):
 
 
 if __name__ == "__main__":
-    print(
-        pigLatin("choice"),
-        pigLatin("wrench"),
-        pigLatin("oops"),
-        pigLatin("boy"),
-        pigLatin("Phone"),
-        pigLatin("Knife"),
-    )
     pig_latin_language = {}
     with open(INPUT_FILE_PATH, "r") as input_file:
         english_language = json.load(input_file)
@@ -84,4 +76,10 @@ if __name__ == "__main__":
         else:
             pig_latin_language[key] = parseString(value)
     with open(OUTPUT_FILE_PATH, "w") as output_file:
-        json.dump(pig_latin_language, output_file)
+        json.dump(
+            pig_latin_language,
+            output_file,
+            sort_keys=False,
+            indent=4,
+            separators=(",", ": "),
+        )
