@@ -1,6 +1,7 @@
 VOWELS = "AEIOUaeiou"
 LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
+
 def pigLatin(word):
     if word[0] in VOWELS:
         return word + "hay"
@@ -11,6 +12,7 @@ def pigLatin(word):
             word = word.title()
         word += leadingConsonant.lower() + "ay"
         return word
+
 
 def parseString(string):
     outString = ""
@@ -28,7 +30,11 @@ def parseString(string):
         else:
             if (character in LETTERS) and (string[index + 1] in LETTERS):
                 currentWord += character
-            elif (character in LETTERS) and (not (string[index + 1] in LETTERS)) and (currentWord != ""):
+            elif (
+                (character in LETTERS)
+                and (not (string[index + 1] in LETTERS))
+                and (currentWord != "")
+            ):
                 currentWord += character
                 currentWord = pigLatin(currentWord)
                 outString += currentWord
