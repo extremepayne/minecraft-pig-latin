@@ -8,13 +8,26 @@ LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
 def pigLatin(word):
     if word[0] in VOWELS:
+        # vowels dont go to the end of the word
         return word + "hay"
     else:
-        leadingConsonant = word[0]
-        word = word[1:]
-        if leadingConsonant.isupper():
-            word = word.title()
-        word += leadingConsonant.lower() + "ay"
+        if (
+            ((word[0] in "cptswCPTSW") and (word[1] in "hH"))
+            or ((word[0] in "kK") and (word[1] in "nN"))
+            or ((word[0] in "wW") and (word[1] in "rR"))
+        ):
+            # handle initial diagraphs
+            leadingConsonant = word[:2]
+            word = word[2:]
+            if leadingConsonant.istitle():
+                word = word.title()
+            word += leadingConsonant.lower() + "ay"
+        else:
+            leadingConsonant = word[0]
+            word = word[1:]
+            if leadingConsonant.isupper():
+                word = word.title()
+            word += leadingConsonant.lower() + "ay"
         return word
 
 
@@ -50,6 +63,14 @@ def parseString(string):
 
 
 if __name__ == "__main__":
+    print(
+        pigLatin("choice"),
+        pigLatin("wrench"),
+        pigLatin("oops"),
+        pigLatin("boy"),
+        pigLatin("Phone"),
+        pigLatin("Knife"),
+    )
     pig_latin_language = {}
     with open(INPUT_FILE_PATH, "r") as input_file:
         english_language = json.load(input_file)
