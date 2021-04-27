@@ -1,3 +1,7 @@
+import json
+
+INPUT_FILE_PATH = "pl_us.json"
+OUTPUT_FILE_PATH = "pl_pig.json"
 VOWELS = "AEIOUaeiou"
 LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
@@ -46,13 +50,24 @@ def parseString(string):
 
 
 if __name__ == "__main__":
-    # print("doing 'Done'")
-    # print(pigLatin("Done"))
-    # print("Doing 'off'")
-    # print(pigLatin("off"))
-    # print("Doing 'remote'")
-    # print(pigLatin("remote"))
-    # print("Doing 'button'")
-    # print(pigLatin("button"))
-    print("Parsing 'Reset %s button'")
-    print(parseString("Reset %s button"))
+    # print("Parsing 'Reset %s button'")
+    # print(parseString("Reset %s button"))
+    pig_latin_language = {}
+    with open(INPUT_FILE_PATH, "r") as input_file:
+        english_language = json.load(input_file)
+    for key, value in english_language.items():
+        if key == "language.name":
+            pig_latin_language["language.name"] = "Pig Latin"
+        elif key == "language.region":
+            pig_latin_language["language.region"] = "Pigland"
+        elif key == "language.code":
+            pig_latin_language["language.code"] = "lt_pig"
+        else:
+            pig_latin_language[key] = parseString(value)
+    count = 0
+    for key, value in pig_latin_language.items():
+        if count < 100:
+            print(value)
+        count += 1
+    with open(OUTPUT_FILE_PATH, "w") as output_file:
+        json.dump(pig_latin_language, output_file)
