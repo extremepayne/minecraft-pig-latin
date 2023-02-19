@@ -1,7 +1,7 @@
 import json
 
-INPUT_FILE_PATH = "pl_us.json"
-OUTPUT_FILE_PATH = "pl_pig.json"
+INPUT_FILE_PATH = "en_us.json"
+OUTPUT_FILE_PATH = "la_pig.json"
 VOWELS = "AEIOUaeiou"
 LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
@@ -72,7 +72,7 @@ if __name__ == "__main__":
         elif key == "language.region":
             pig_latin_language["language.region"] = "Pigland"
         elif key == "language.code":
-            pig_latin_language["language.code"] = "lt_pig"
+            pig_latin_language["language.code"] = "la_pig"
         else:
             pig_latin_language[key] = parseString(value)
     with open(OUTPUT_FILE_PATH, "w") as output_file:
